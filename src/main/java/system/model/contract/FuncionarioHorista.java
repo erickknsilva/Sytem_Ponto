@@ -26,7 +26,7 @@ public class FuncionarioHorista extends ContratoFuncionario {
     private PontoRepository pontoRepository;
 
     @Autowired
-    private RegistryPontoService servicePonto;
+    private RegistryPontoService registryPontoService;
 
     public FuncionarioHorista() {
     }
@@ -34,8 +34,6 @@ public class FuncionarioHorista extends ContratoFuncionario {
     public FuncionarioHorista(Funcionario funcionario) {
         super(funcionario);
     }
-
-
 
     @Override
     public BigDecimal calcularSalarioPorDia(BigDecimal salario, int cargaMensal, LocalTime horasTrabalhadas) {
@@ -54,15 +52,14 @@ public class FuncionarioHorista extends ContratoFuncionario {
         return salarioPorDia.setScale(2, RoundingMode.HALF_DOWN);
     }
 
-
     @Override
     public Ponto abrirPonto(Integer matricula) {
-        return this.servicePonto.abrirPonto(matricula);
+        return this.registryPontoService.abrirPonto(matricula);
     }
 
     @Override
     public Ponto fecharPonto(Integer matricula) {
-        return this.servicePonto.fecharPonto(matricula);
+        return this.registryPontoService.fecharPonto(matricula);
     }
 
 }

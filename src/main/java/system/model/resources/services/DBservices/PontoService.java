@@ -16,6 +16,7 @@ import system.model.repositorys.PontoRepository;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+import system.infrastructure.email.EmailService;
 
 /**
  * @author eric
@@ -59,15 +60,14 @@ public class PontoService {
 
     public String registrarPonto(Integer matricula) {
 
-
         Funcionario funcionario = funcionarioService.findById(matricula);
 
-        if (funcionario != null && funcionario.getTipoContrato().equalsIgnoreCase("mensalista")) {
+        if (funcionario != null) {
             ContratoFuncionario contrato = this.funcionarioHorista;
             Ponto pontoAnterior = pontoRepository.findFirstByFuncionarioOrderByDataDesc(funcionario);
 
             if (seAbrirPonto(pontoAnterior)) {
-                return abrirPonto(contrato, matricula, funcionario, pontoAnterior);
+                return abrirPonto(contrato, matricula, funcionario);
             } else if (seFecharPonto(pontoAnterior)) {
                 return "Não é possível bater o ponto novamente no mesmo dia após fechá-lo.";
             } else {
@@ -78,7 +78,6 @@ public class PontoService {
 
     }
 
-
     private boolean seAbrirPonto(Ponto pontoAnterior) {
         return pontoAnterior == null || pontoAnterior.getData().isBefore(LocalDate.now());
     }
@@ -88,10 +87,11 @@ public class PontoService {
     }
 
     private String abrirPonto(ContratoFuncionario contrato, Integer matricula,
-                              Funcionario funcionario, Ponto pontoAnterior) {
+            Funcionario funcionario) {
 
         Ponto ponto = contrato.abrirPonto(matricula);
         if (ponto != null) {
+            contrato.mensagemEmailAbrirPonto(funcionario, ponto);
             return "Ponto registrado com sucesso.";
         }
         return null;
@@ -99,33 +99,64 @@ public class PontoService {
     }
 
     /**
-     * Fecha o ponto do funcionário, calcula o salário diário e acumulado do mês.
+     * Fecha o ponto do funcionário, calcula o salário diário e acumulado do
+     * mês.
      *
-     * @param contrato      O contrato do funcionário
-     * @param matricula     A matrícula do funcionário
-     * @param funcionario   O objeto do funcionário
+     * @param contrato O contrato do funcionário
+     * @param matricula A matrícula do funcionário
+     * @param funcionario O objeto do funcionário
      * @param pontoAnterior O ponto anterior do funcionário
-     * @return Uma mensagem de sucesso ou null se o ponto fechado não for encontrado.
+     * @return Uma mensagem de sucesso ou null se o ponto fechado não for
+     * encontrado.
      * @author Erick Nunes da Silva
      */
+//    private String fecharPonto(ContratoFuncionario contrato, Integer matricula, Funcionario funcionario, Ponto pontoAnterior) {
+//
+//        Ponto pontoFechado = contrato.fecharPonto(matricula);
+//
+//        if (pontoFechado != null) {
+//
+//            // Calcula o salário diário do ponto fechado
+//            pontoFechado.setSalarioDia(contrato.calcularSalarioPorDia(funcionario.getSalario(),
+//                    funcionario.getCargaMensal(), pontoAnterior.getHorasTrabalhada()));
+//
+//            // Calcula o salário acumulado do mês
+//            BigDecimal salarioMesAcumulado = calcularSalarioMesAcumulado(funcionario, pontoFechado);
+//
+//            // Calcula o novo salário acumulado do mês
+//            BigDecimal novoSalarioMes = salarioMesAcumulado.add(pontoFechado.getSalarioDia());
+//
+//            //pega o salario do dia e adiciona na soma do salario acumulado do mês
+//            pontoFechado.setSalarioMes(novoSalarioMes);
+//            pontoRepository.save(pontoFechado);
+//            return "Ponto fechado com sucesso.";
+//        }
+//        return null;
+//    }
     private String fecharPonto(ContratoFuncionario contrato, Integer matricula, Funcionario funcionario, Ponto pontoAnterior) {
-
         Ponto pontoFechado = contrato.fecharPonto(matricula);
 
         if (pontoFechado != null) {
+            // Verifica se o funcionário é do tipo "horista"
+            if (funcionario.getTipoContrato().equalsIgnoreCase("horista")) {
+                // Calcula o salário diário do ponto fechado
+                pontoFechado.setSalarioDia(contrato.calcularSalarioPorDia(funcionario.getSalario(),
+                        funcionario.getCargaMensal(), pontoAnterior.getHorasTrabalhada()));
 
-            // Calcula o salário diário do ponto fechado
-            pontoFechado.setSalarioDia(contrato.calcularSalarioPorDia(funcionario.getSalario(),
-                    funcionario.getCargaMensal(), pontoAnterior.getHorasTrabalhada()));
+                // Calcula o salário acumulado do mês
+                BigDecimal salarioMesAcumulado = calcularSalarioMesAcumulado(funcionario, pontoFechado);
 
-            // Calcula o salário acumulado do mês
-            BigDecimal salarioMesAcumulado = calcularSalarioMesAcumulado(funcionario, pontoFechado);
+                // Calcula o novo salário acumulado do mês
+                BigDecimal novoSalarioMes = salarioMesAcumulado.add(pontoFechado.getSalarioDia());
 
-            // Calcula o novo salário acumulado do mês
-            BigDecimal novoSalarioMes = salarioMesAcumulado.add(pontoFechado.getSalarioDia());
+                // Atualiza o salário acumulado do mês
+                pontoFechado.setSalarioMes(novoSalarioMes);
+            } else {
+                // Para funcionários do tipo "mensalista", apenas insere a hora de entrada e saída
+                pontoFechado.setHoraEntrada(pontoAnterior.getHoraEntrada());
+                pontoFechado.setHoraSaida(pontoAnterior.getHoraSaida());
+            }
 
-            //pega o salario do dia e adiciona na soma do salario acumulado do mês
-            pontoFechado.setSalarioMes(novoSalarioMes);
             pontoRepository.save(pontoFechado);
             return "Ponto fechado com sucesso.";
         }
@@ -133,11 +164,13 @@ public class PontoService {
     }
 
     /**
-     * Calcula o valor acumulado do salário do mês para um funcionário horista, excluindo o ponto fechado.
-     * A lógica do método calcularSalarioMesAcumulado é iterar sobre todos os pontos anteriores do funcionário,
-     * somando os valores dos salários diários desses pontos. O ponto fechado = ponto do dia não entra nesse calculo.
+     * Calcula o valor acumulado do salário do mês para um funcionário horista,
+     * excluindo o ponto fechado. A lógica do método calcularSalarioMesAcumulado
+     * é iterar sobre todos os pontos anteriores do funcionário, somando os
+     * valores dos salários diários desses pontos. O ponto fechado = ponto do
+     * dia não entra nesse calculo.
      *
-     * @param funcionario  O funcionário para o qual o cálculo está sendo feito.
+     * @param funcionario O funcionário para o qual o cálculo está sendo feito.
      * @param pontoFechado O ponto fechado que será excluído do cálculo.
      * @return O valor acumulado do salário do mês para o funcionário.
      * @author Erick Nunes da Silva

@@ -16,7 +16,6 @@ import system.model.repositorys.PontoRepository;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,14 +46,20 @@ public class PontoServiceTest {
 
         depRepository.saveAll(listaDepartamento);
 
-        listaFuncionario.add(new Funcionario("Erick", "Silva", new BigDecimal("3343.23"),
-                8, 44, 160, "Mensalista",
-                LocalDate.of(2023, 06, 02), depRepository.getReferenceById(1)));
+        listaFuncionario.add(new Funcionario("Erick", "Silva",
+                "erick.nunessilva10@gmail.com", new BigDecimal("3343.23"),
+                LocalTime.of(8, 40), 44, 160, "Mensalista",
+                LocalDate.of(2023, 06, 02),
+                depRepository.getReferenceById(1)));
 
-        listaFuncionario.add(new Funcionario("Amauri", "Ferreira", new BigDecimal("3543.23"),
-                8, 44, 160, "Mensalista", LocalDate.now(), depRepository.getReferenceById(1)));
+        listaFuncionario.add(new Funcionario("Amauri", "Ferreira",
+                "erick.nsilva100@gmail.com", new BigDecimal("3543.23"),
+                LocalTime.of(8, 40), 44, 160, "Mensalista",
+                LocalDate.now(),
+                depRepository.getReferenceById(1)));
 
         funcRepository.saveAll(listaFuncionario);
+
     }
 
     @Bean

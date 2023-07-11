@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: sistema_ponto.demo.DemoApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.734 s <<< FAILURE! - in sistema_ponto.demo.DemoApplicationTests
-sistema_ponto.demo.DemoApplicationTests  Time elapsed: 0.734 s  <<< ERROR!
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.662 s <<< FAILURE! - in sistema_ponto.demo.DemoApplicationTests
+sistema_ponto.demo.DemoApplicationTests  Time elapsed: 0.662 s  <<< ERROR!
 java.lang.IllegalStateException: Unable to find a @SpringBootConfiguration, you need to use @ContextConfiguration or @SpringBootTest(classes=...) with your test
 	at org.springframework.util.Assert.state(Assert.java:76)
 	at org.springframework.boot.test.context.SpringBootTestContextBootstrapper.findConfigurationClass(SpringBootTestContextBootstrapper.java:260)

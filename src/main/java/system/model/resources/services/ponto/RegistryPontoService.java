@@ -16,7 +16,6 @@ import system.model.entity.Ponto;
 import system.model.repositorys.FuncionarioRepository;
 import system.model.repositorys.PontoRepository;
 
-
 /**
  * @author erick Nunes da Silva
  */
@@ -27,9 +26,8 @@ public class RegistryPontoService {
     private final FuncionarioRepository funcRepository;
     private final PontoRepository pontoRepository;
 
-
     private Ponto salvarPonto(LocalTime entrada, LocalTime saida,
-                              Funcionario funcionario, LocalTime horasTrabalhada) {
+            Funcionario funcionario, LocalTime horasTrabalhada) {
 
         Ponto ponto = new Ponto();
 
@@ -49,7 +47,6 @@ public class RegistryPontoService {
         return horaSaida.minusHours(horaEntrada.getHour())
                 .minusMinutes(horaEntrada.getMinute());
     }
-
 
     public Ponto abrirPonto(Integer matricula) {
 
@@ -80,4 +77,6 @@ public class RegistryPontoService {
         ponto.setHoraSaida(horaSaida);
         ponto.setHorasTrabalhada(calcularHoraTrabalhada(ponto.getHoraEntrada(), horaSaida));
     }
+
+   
 }

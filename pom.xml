@@ -62,7 +62,14 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-
+        
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+       
+   
+       
         <!--        <dependency>-->
         <!--            <groupId>org.springframework.boot</groupId>-->
         <!--            <artifactId>spring-boot-starter-data-jdbc</artifactId>-->
@@ -74,6 +81,7 @@
         <!--            <version>8.0.27</version>-->
         <!--        </dependency>-->
 
+       
 
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
@@ -122,6 +130,12 @@
             <version>2.0.1</version>
             <type>jar</type>
         </dependency>
+        <!--        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>5.3.24</version>
+            <type>jar</type>
+        </dependency>-->
     </dependencies>
 
     <build>

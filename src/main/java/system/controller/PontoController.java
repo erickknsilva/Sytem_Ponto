@@ -29,7 +29,7 @@ public class PontoController {
     public ResponseEntity<String> registrarPonto(@PathVariable String matricula) {
         try {
 
-            Integer matriculaInt = Integer.parseInt(matricula);
+            Integer matriculaInt = Integer.valueOf(matricula);
 
             String mensagem = this.pontoService.registrarPonto(matriculaInt);
             if (mensagem != null) {
@@ -43,7 +43,6 @@ public class PontoController {
              */
             throw new NumberFormatException("Insira o numero da sua matricula.");
         }
-
 
     }
 }

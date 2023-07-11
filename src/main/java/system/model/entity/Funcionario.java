@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.EqualsAndHashCode;
@@ -19,6 +20,7 @@ import org.hibernate.validator.constraints.Range;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Getter
@@ -43,6 +45,12 @@ public class Funcionario {
     @Column(name = "sobrenome")
     private String sobrenome;
 
+    @Email
+    @NotBlank(message = "Insira um email valido exemplo teste@gmail.com")
+    @Length(min = 4, max = 80, message = "O email deve estar entre {min} e {max} caractere.")
+    @Column(name = "email")
+    private String email;
+
     @Column(name = "salario")
     @Range(min = 5, message = "O valor minimo para cadastrar é {min} reais")
     @Digits(integer = 6, fraction = 2, message = "Apenas centenas e 2 casas após o ponto.")
@@ -50,10 +58,10 @@ public class Funcionario {
 //    @Digits(integer = 6, fraction = 2, message = "Apenas centenas e 2 casas após o ponto. Exemplo 3234.54")
     private BigDecimal salario;
 
-    @Range(min = 4, max = 12, message = "A carga horaria deve respeitar a quantidade entre {min} e {max} horas.")
-    @NotNull(message = "Insira a carga horaria diaria.")
+//    @Range(min = 4, max = 12, message = "A carga horaria deve respeitar a quantidade entre {min} e {max} horas.")
+//    @NotNull(message = "Insira a carga horaria diaria.")
     @Column(name = "carga_diaria")
-    private Integer cargaDiaria;
+    private LocalTime cargaDiaria;
 
     @Range(min = 0, message = "O valor minimo para cadastrar a carga semanal é {min} ")
     @Column(name = "carga_semanal")
@@ -83,11 +91,14 @@ public class Funcionario {
         this.matricula = matricula;
     }
 
-    public Funcionario(@NotBlank String nome, @NotBlank String sobrenome, @NotNull BigDecimal salario, @NotNull Integer cargaDiaria,
-            @NotNull Integer cargaSemanal, @NotNull Integer cargaMensal, @NotNull String tipoContrato, @NotNull LocalDate dataEntrada, @NotNull Departamento departamento) {
+    public Funcionario(@NotBlank String nome, @NotBlank String sobrenome, @NotBlank String email,
+            @NotNull BigDecimal salario, @NotNull LocalTime cargaDiaria, @NotNull Integer cargaSemanal,
+            @NotNull Integer cargaMensal, @NotNull String tipoContrato, @NotNull LocalDate dataEntrada,
+            @NotNull Departamento departamento) {
 
         this.nome = nome;
         this.sobrenome = sobrenome;
+        this.email = email;
         this.salario = salario;
         this.cargaDiaria = cargaDiaria;
         this.cargaSemanal = cargaSemanal;
