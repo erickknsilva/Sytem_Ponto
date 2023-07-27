@@ -4,21 +4,27 @@
  */
 package system.controller;
 
-import jakarta.transaction.Transactional;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import system.infrastructure.exceptions.ValidationException;
+import system.infrastructure.exceptions.advice.FuncionarioControllerException;
 import system.model.entity.Funcionario;
-
-import java.net.URI;
-import java.util.List;
-
-import lombok.RequiredArgsConstructor;
 import system.model.resources.services.DBservices.FuncionarioService;
 
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
+
+@FuncionarioControllerException
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("funcionarios")
+@CrossOrigin(origins = "*")
 public class FuncionarioController {
 
     private final FuncionarioService funcionarioService;
@@ -27,6 +33,18 @@ public class FuncionarioController {
     public ResponseEntity<List<Funcionario>> findAll() {
 
         List<Funcionario> listaFuncionarios = this.funcionarioService.findAll();
+        if (listaFuncionarios != null && !listaFuncionarios.isEmpty()) {
+            return ResponseEntity.ok(listaFuncionarios);
+        }
+        return ResponseEntity.noContent().build();
+    }
+
+
+    @GetMapping("/{page}/{size}")
+    public ResponseEntity<Page<Funcionario>> findAll(@PathVariable int page,
+                                                     @PathVariable int size) {
+
+        Page<Funcionario> listaFuncionarios = this.funcionarioService.findAll(page, size);
         if (listaFuncionarios != null && !listaFuncionarios.isEmpty()) {
             return ResponseEntity.ok(listaFuncionarios);
         }
@@ -55,7 +73,6 @@ public class FuncionarioController {
     }
 
     @DeleteMapping("/excluir/{matricula}")
-    @Transactional
     public ResponseEntity<String> delete(@PathVariable Integer matricula) {
 
         String mensagem = this.funcionarioService.delete(matricula);
@@ -66,15 +83,25 @@ public class FuncionarioController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/atualizar/{matricula}")
+    @PostMapping("/atualizar/{matricula}")
     public ResponseEntity<Funcionario> update(@PathVariable Integer matricula,
                                               @RequestBody Funcionario funcionario) {
+        try {
+            Funcionario funcUpdate = this.funcionarioService.update(matricula, funcionario);
+            if (funcUpdate != null) {
+                return ResponseEntity.ok(funcUpdate);
+            }
+            return ResponseEntity.noContent().build();
+        } catch (ConstraintViolationException ex) {
+            List<String> errorMessages = new ArrayList<>();
 
-        Funcionario funcUpdate = this.funcionarioService.update(matricula, funcionario);
-        if (funcUpdate != null) {
-            return ResponseEntity.ok(funcUpdate);
+            for (ConstraintViolation<?> violation : ex.getConstraintViolations()) {
+                String errorMessage = violation.getMessage();
+                errorMessages.add(errorMessage);
+            }
+
+            throw new ValidationException(errorMessages);
         }
-        return ResponseEntity.noContent().build();
     }
 
 }

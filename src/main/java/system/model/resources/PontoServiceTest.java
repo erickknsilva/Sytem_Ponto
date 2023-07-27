@@ -37,26 +37,43 @@ public class PontoServiceTest {
         List<Departamento> listaDepartamento = new ArrayList<>();
 
         listaDepartamento.add(new Departamento("Administracao", "adm2ksoft@gmail.com",
-                "(11)98823-3217", "Erick"));
+                "(11)98823-3217", "Erick Silva"));
         listaDepartamento.add(new Departamento("Recurso Humanos", "rh2ksoft@gmail.com",
-                "(11)98867-7667", "Amauri"));
+                "(11)98867-7667", "Blade Silva"));
 
         listaDepartamento.add(new Departamento("Contabilidade", "contabil2ksoft@gmail.com",
-                "(11)98867-7667", "Erick"));
+                "(11)98867-7667", "Nina Silva"));
+
+        listaDepartamento.add(new Departamento("Marketing", "mkgDigital@gmail.com",
+                "(11)98867-7643", "Bethovem Silva"));
+        listaDepartamento.add(new Departamento("Tech", "techLogia@gmail.com",
+                "(11)98867-7667", "Erick Silva"));
 
         depRepository.saveAll(listaDepartamento);
 
         listaFuncionario.add(new Funcionario("Erick", "Silva",
-                "erick.nunessilva10@gmail.com", new BigDecimal("3343.23"),
+                "teste@gmail.com", new BigDecimal("3343.23"),
                 LocalTime.of(8, 40), 44, 160, "Mensalista",
                 LocalDate.of(2023, 06, 02),
-                depRepository.getReferenceById(1)));
+                depRepository.getReferenceById(5)));
 
-        listaFuncionario.add(new Funcionario("Amauri", "Ferreira",
-                "erick.nsilva100@gmail.com", new BigDecimal("3543.23"),
+        listaFuncionario.add(new Funcionario("Blade", "Silva",
+                "teste@gmail.com", new BigDecimal("3543.23"),
                 LocalTime.of(8, 40), 44, 160, "Mensalista",
                 LocalDate.now(),
-                depRepository.getReferenceById(1)));
+                depRepository.getReferenceById(2)));
+
+        listaFuncionario.add(new Funcionario("Nina", "Silva",
+                "teste@gmail.com", new BigDecimal("3543.23"),
+                LocalTime.of(8, 40), 44, 160, "Horista",
+                LocalDate.now(),
+                depRepository.getReferenceById(3)));
+
+        listaFuncionario.add(new Funcionario("Bethovem", "Silva",
+                "teste@gmail.com", new BigDecimal("3543.23"),
+                LocalTime.of(8, 40), 44, 160, "Mensalista",
+                LocalDate.now(),
+                depRepository.getReferenceById(4)));
 
         funcRepository.saveAll(listaFuncionario);
 
@@ -79,7 +96,7 @@ public class PontoServiceTest {
     }
 
     private Ponto criarPonto(LocalTime entrada, LocalTime saida,
-            Funcionario funcionario, LocalTime horasTrabalhada) {
+                             Funcionario funcionario, LocalTime horasTrabalhada) {
 
         Ponto ponto = new Ponto();
 

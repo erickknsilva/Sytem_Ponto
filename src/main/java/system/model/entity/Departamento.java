@@ -6,6 +6,7 @@ package system.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
@@ -35,7 +36,7 @@ public class Departamento {
     private String nome;
 
     @Email
-    @NotBlank(message = "Insira um email valido exemplo teste@gmail.com")
+    @NotBlank(message = "Insira um email valido exemplo: teste@gmail.com")
     @Length(min = 4, max = 60, message = "O email deve estar entre {min} e {max} caractere.")
     @Column(name = "email")
     private String email;
@@ -44,7 +45,7 @@ public class Departamento {
     @Column(name = "telefone")
     private String telefone;
 
-    @Length(min = 4, max = 80, message = "O nome deve estar entre {min} e {max} caractere.\nExperimente abreviar.")
+    @Length(max = 80, message = "O nome deve estar entre {min} e {max} caractere.\nExperimente abreviar.")
     @Column(name = "responsavel")
     private String responsavel;
 
@@ -52,17 +53,21 @@ public class Departamento {
     @OneToMany(mappedBy = "departamento", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Funcionario> funcionario;
 
-    public Departamento(String nome, String email, String telefone, String responsavel) {
+    public Departamento(@NotBlank String nome, @NotBlank String email, String telefone, String responsavel) {
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
         this.responsavel = responsavel;
     }
 
-    public Departamento(Departamento departamento) {
+    public Departamento(@Valid Departamento departamento) {
         this.nome = departamento.getNome();
         this.email = departamento.getEmail();
         this.telefone = departamento.getTelefone();
         this.responsavel = departamento.getResponsavel();
+    }
+
+    public Departamento(Integer id) {
+        this.id = id;
     }
 }

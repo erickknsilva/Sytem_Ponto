@@ -54,12 +54,11 @@ public class Funcionario {
     @Column(name = "salario")
     @Range(min = 5, message = "O valor minimo para cadastrar é {min} reais")
     @Digits(integer = 6, fraction = 2, message = "Apenas centenas e 2 casas após o ponto.")
-//    @NotNull(message = "Insira o salario do funcionario")
-//    @Digits(integer = 6, fraction = 2, message = "Apenas centenas e 2 casas após o ponto. Exemplo 3234.54")
+    @NotNull(message = "Insira o salario do funcionario")
+    @Digits(integer = 6, fraction = 2, message = "Apenas centenas e 2 casas após o ponto. Exemplo 3234.54")
     private BigDecimal salario;
 
-//    @Range(min = 4, max = 12, message = "A carga horaria deve respeitar a quantidade entre {min} e {max} horas.")
-//    @NotNull(message = "Insira a carga horaria diaria.")
+    @NotNull(message = "Insira a carga horaria diaria.")
     @Column(name = "carga_diaria")
     private LocalTime cargaDiaria;
 
@@ -92,9 +91,9 @@ public class Funcionario {
     }
 
     public Funcionario(@NotBlank String nome, @NotBlank String sobrenome, @NotBlank String email,
-            @NotNull BigDecimal salario, @NotNull LocalTime cargaDiaria, @NotNull Integer cargaSemanal,
-            @NotNull Integer cargaMensal, @NotNull String tipoContrato, @NotNull LocalDate dataEntrada,
-            @NotNull Departamento departamento) {
+                       @NotNull BigDecimal salario, @NotNull LocalTime cargaDiaria, @NotNull Integer cargaSemanal,
+                       @NotNull Integer cargaMensal, @NotNull String tipoContrato, @NotNull LocalDate dataEntrada,
+                       @NotNull Departamento departamento) {
 
         this.nome = nome;
         this.sobrenome = sobrenome;

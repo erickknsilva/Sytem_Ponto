@@ -7,8 +7,7 @@ package system.model.resources.services.DBservices;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
-import system.model.contract.ContratoFuncionario;
-import system.model.contract.FuncionarioHorista;
+import system.model.contract.Employee;
 import system.model.entity.Funcionario;
 import system.model.entity.Ponto;
 import system.model.repositorys.PontoRepository;
@@ -16,7 +15,6 @@ import system.model.repositorys.PontoRepository;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
-import system.infrastructure.email.EmailService;
 
 /**
  * @author eric
@@ -26,7 +24,7 @@ import system.infrastructure.email.EmailService;
 public class PontoService {
 
     private final FuncionarioService funcionarioService;
-    private final FuncionarioHorista funcionarioHorista;
+    private final Employee employee;
     private final PontoRepository pontoRepository;
 
     public Ponto findById(Integer id) {
@@ -63,15 +61,15 @@ public class PontoService {
         Funcionario funcionario = funcionarioService.findById(matricula);
 
         if (funcionario != null) {
-            ContratoFuncionario contrato = this.funcionarioHorista;
+//            ContratoFuncionario contrato = this.employee;
             Ponto pontoAnterior = pontoRepository.findFirstByFuncionarioOrderByDataDesc(funcionario);
 
             if (seAbrirPonto(pontoAnterior)) {
-                return abrirPonto(contrato, matricula, funcionario);
+                return abrirPonto(this.employee, matricula, funcionario);
             } else if (seFecharPonto(pontoAnterior)) {
-                return "Não é possível bater o ponto novamente no mesmo dia após fechá-lo.";
+                return "Não é possível bater o ponto novamente,\nno mesmo dia após fechá-lo.";
             } else {
-                return fecharPonto(contrato, matricula, funcionario, pontoAnterior);
+                return fecharPonto(this.employee, matricula, funcionario, pontoAnterior);
             }
         }
         return null;
@@ -86,12 +84,12 @@ public class PontoService {
         return pontoAnterior.getHoraSaida() != null && pontoAnterior.getData().isEqual(LocalDate.now());
     }
 
-    private String abrirPonto(ContratoFuncionario contrato, Integer matricula,
-            Funcionario funcionario) {
+    private String abrirPonto(Employee employee, Integer matricula,
+                              Funcionario funcionario) {
 
-        Ponto ponto = contrato.abrirPonto(matricula);
+        Ponto ponto = employee.abrirPonto(matricula);
         if (ponto != null) {
-            contrato.mensagemEmailAbrirPonto(funcionario, ponto);
+            employee.mensagemEmailAbrirPonto(funcionario, ponto);
             return "Ponto registrado com sucesso.";
         }
         return null;
@@ -102,9 +100,9 @@ public class PontoService {
      * Fecha o ponto do funcionário, calcula o salário diário e acumulado do
      * mês.
      *
-     * @param contrato O contrato do funcionário
-     * @param matricula A matrícula do funcionário
-     * @param funcionario O objeto do funcionário
+     * @param employee      O contrato do funcionário
+     * @param matricula     A matrícula do funcionário
+     * @param funcionario   O objeto do funcionário
      * @param pontoAnterior O ponto anterior do funcionário
      * @return Uma mensagem de sucesso ou null se o ponto fechado não for
      * encontrado.
@@ -133,14 +131,14 @@ public class PontoService {
 //        }
 //        return null;
 //    }
-    private String fecharPonto(ContratoFuncionario contrato, Integer matricula, Funcionario funcionario, Ponto pontoAnterior) {
-        Ponto pontoFechado = contrato.fecharPonto(matricula);
+    private String fecharPonto(Employee employee, Integer matricula, system.model.entity.Funcionario funcionario, Ponto pontoAnterior) {
+        Ponto pontoFechado = employee.fecharPonto(matricula);
 
         if (pontoFechado != null) {
             // Verifica se o funcionário é do tipo "horista"
             if (funcionario.getTipoContrato().equalsIgnoreCase("horista")) {
                 // Calcula o salário diário do ponto fechado
-                pontoFechado.setSalarioDia(contrato.calcularSalarioPorDia(funcionario.getSalario(),
+                pontoFechado.setSalarioDia(employee.calcularSalarioPorDia(funcionario.getSalario(),
                         funcionario.getCargaMensal(), pontoAnterior.getHorasTrabalhada()));
 
                 // Calcula o salário acumulado do mês
@@ -170,12 +168,12 @@ public class PontoService {
      * valores dos salários diários desses pontos. O ponto fechado = ponto do
      * dia não entra nesse calculo.
      *
-     * @param funcionario O funcionário para o qual o cálculo está sendo feito.
+     * @param funcionario  O funcionário para o qual o cálculo está sendo feito.
      * @param pontoFechado O ponto fechado que será excluído do cálculo.
      * @return O valor acumulado do salário do mês para o funcionário.
      * @author Erick Nunes da Silva
      */
-    private BigDecimal calcularSalarioMesAcumulado(Funcionario funcionario, Ponto pontoFechado) {
+    private BigDecimal calcularSalarioMesAcumulado(system.model.entity.Funcionario funcionario, Ponto pontoFechado) {
         //recuperar uma lista de pontos anteriores relacionados a um determinado funcionário, ordenados por data.
         List<Ponto> pontosAnteriores = pontoRepository.findByFuncionarioOrderByData(funcionario);
 

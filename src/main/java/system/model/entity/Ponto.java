@@ -1,24 +1,15 @@
 package system.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotNull;
+import lombok.*;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.Range;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.Range;
 
 @Getter
 @Setter
@@ -30,7 +21,7 @@ public class Ponto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column(name = "hora_entrada")
     private LocalTime horaEntrada;
@@ -66,7 +57,7 @@ public class Ponto {
     @JoinColumn(name = "matricula")
     private Funcionario funcionario;
 
-    public Ponto(Integer id) {
+    public Ponto(Long id) {
         this.id = id;
     }
 

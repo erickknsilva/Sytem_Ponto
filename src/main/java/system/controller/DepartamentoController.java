@@ -4,20 +4,30 @@
  */
 package system.controller;
 
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Valid;
 
 import java.net.URI;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
+import system.infrastructure.exceptions.ValidationException;
 import system.model.entity.Departamento;
+import system.model.entity.Funcionario;
 import system.model.resources.services.DBservices.DepartamentoService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("departamentos")
@@ -36,6 +46,17 @@ public class DepartamentoController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/{page}/{size}")
+    public ResponseEntity<Page<Departamento>> findAllPage(@PathVariable int page, @PathVariable int size) {
+
+        Page<Departamento> departamentoPageable = this.departamentoService.findAll(page, size);
+
+        if (departamentoPageable != null && !departamentoPageable.isEmpty()) {
+            return ResponseEntity.ok(departamentoPageable);
+        }
+        return ResponseEntity.noContent().build();
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Departamento> findById(@PathVariable Integer id) {
         Departamento departamento = departamentoService.findById(id);
@@ -45,15 +66,25 @@ public class DepartamentoController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/atualizar/{id}")
+
+    @PostMapping("/atualizar/{id}")
     public ResponseEntity<Departamento> update(@PathVariable Integer id, @RequestBody @Valid Departamento departamento) {
+        try {
+            Departamento update = departamentoService.update(id, departamento);
+            if (update != null) {
+                return ResponseEntity.ok(update);
+            }
 
-        Departamento update = departamentoService.update(id, departamento);
-        if (update != null) {
-            return ResponseEntity.ok(update);
+            return ResponseEntity.noContent().build();
+        } catch (ConstraintViolationException ex) {
+            List<String> errorMessages = new ArrayList<>();
+
+            for (ConstraintViolation<?> violation : ex.getConstraintViolations()) {
+                String errorMessage = violation.getMessage();
+                errorMessages.add(errorMessage);
+            }
+            throw new ValidationException(errorMessages);
         }
-
-        return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/salvar")
@@ -79,6 +110,6 @@ public class DepartamentoController {
 
         return ResponseEntity.noContent().build();
     }
-    
-    
+
+
 }

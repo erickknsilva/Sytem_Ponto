@@ -1,6 +1,9 @@
 package system.model.resources.services.DBservices;
 
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import system.model.entity.Departamento;
 import system.model.repositorys.DepartamentoRepository;
@@ -24,6 +27,12 @@ public class DepartamentoService {
         }
 
         return null;
+    }
+
+    public Page<Departamento> findAll(int page, int size) {
+
+        Pageable pageable = PageRequest.of(page, size);
+        return this.departamentoRepository.findAll(pageable);
     }
 
     public Departamento findById(Integer id) {
