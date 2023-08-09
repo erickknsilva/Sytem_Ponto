@@ -39,11 +39,11 @@ Tambem foi utilizado uma aplicação Front-end consumindo os ENDPOINT da API dis
 e utilizando HTML/CSS para fornecer uma interface para o usuario.
 
 - ponto-controller
-
+```
 
 POST
 /pontos
-
+```
 - funcionario-controller
 ```
 GET
@@ -65,9 +65,9 @@ DELETE
 /funcionarios/excluir/{matricula}
 ```
 
-departamento-controller
+- departamento-controller
 
-
+```
 POST
 /departamentos/salvar
 
@@ -85,5 +85,5 @@ GET
 
 DELETE
 /departamentos/excluir/{id}
-
+```
 
