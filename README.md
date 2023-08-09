@@ -38,6 +38,52 @@ Para fazer as requisições HTTP abaixo, foi utilizada a ferramenta [httpie]((ht
 Tambem foi utilizado uma aplicação Front-end consumindo os ENDPOINT da API disponibilizada, usando o Fetch API do JavaScript
 e utilizando HTML/CSS para fornecer uma interface para o usuario.
 
+- ponto-controller
 
+
+POST
+/pontos
+
+- funcionario-controller
+```
+GET
+/funcionarios
+
+POST
+/funcionarios
+
+POST
+/funcionarios/atualizar/{matricula}
+
+GET
+/funcionarios/{page}/{size}
+
+GET
+/funcionarios/{matricula}
+
+DELETE
+/funcionarios/excluir/{matricula}
+```
+
+departamento-controller
+
+
+POST
+/departamentos/salvar
+
+POST
+/departamentos/atualizar/{id}
+
+GET
+/departamentos
+
+GET
+/departamentos/{page}/{size}
+
+GET
+/departamentos/{id}
+
+DELETE
+/departamentos/excluir/{id}
 
 
