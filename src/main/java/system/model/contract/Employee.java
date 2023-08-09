@@ -63,7 +63,7 @@ public class Employee implements Contract {
         LocalDateTime hora = LocalDateTime.now();
         system.model.entity.Funcionario funcionario = funcRepository.findByMatricula(matricula);
 
-        return pontoRepository.save(salvarPonto(LocalTime.of(8, hora.getMinute()),
+        return pontoRepository.save(salvarPonto(LocalTime.of(hora.getHour(), hora.getMinute()),
                 null, funcionario, null));
     }
 
@@ -76,7 +76,7 @@ public class Employee implements Contract {
 
             if (pontoAnterior != null && pontoAnterior.getHoraSaida() == null) {
 
-                atualizarPonto(pontoAnterior, LocalTime.of(16, LocalTime.now().getMinute()));
+                atualizarPonto(pontoAnterior, LocalTime.of(LocalTime.now().getHour(), LocalTime.now().getMinute()));
                 return this.pontoRepository.save(pontoAnterior);
             }
         }
