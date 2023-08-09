@@ -5,8 +5,8 @@
 API para registrar os pontos do funcionarios, encaminhando um email com as informações hora de entrada, almoço/retorno e saida 
 se ele vor do tipo "mensalista". Agora se o funcionario vor do tipo "horista", o email deve conter a hora de entrada, quantidade
 de horas trabalhas, salario do dia e o salario do mês até o momento. 
-Objetivo é deixa os funcionarios cientes e confortavel, tendo o acesso do registro do seu ponto a qualquer momento, podendo acom-
-panhar sua jornada diária, semanal e mensal.
+Objetivo é deixa os funcionarios cientes e confortavel, tendo o acesso do registro do seu ponto a qualquer momento, podendo consultar
+sua jornada diária, semanal e mensal a hora que quiser. 
 
 
 
