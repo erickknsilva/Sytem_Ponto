@@ -38,6 +38,9 @@ O Swagger poderá ser visualizado em [localhost:8080/swagger-ui.html](http://loc
 Para fazer as requisições HTTP abaixo, foi utilizada a ferramenta [httpie]((https://www.postman.com/)),
 Tambem foi utilizado uma aplicação Front-end consumindo os ENDPOINT da API disponibilizada, usando o Fetch API do JavaScript
 e utilizando HTML/CSS para fornecer uma interface para o usuario.
+Se desejar utilizar uma interface abra a pasta front-SystemPonto, no Visual Stuido Code, baixe a extensao Live serve e abra uma
+guia HTML utilizando o "Live Server", é necessario estar conectado na internet, por causa que está sendo utilizado a biblioteca do 
+[Fontawesome](https://fontawesome.com/start) e o [SweetAlert2](https://sweetalert2.github.io/), necessitando de internet para funcionar.
 
 - ponto-controller
 ```
