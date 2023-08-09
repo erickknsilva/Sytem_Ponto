@@ -35,7 +35,7 @@ O Swagger poderá ser visualizado em [localhost:8080/swagger-ui.html](http://loc
 
 ## API Endpoints
 
-Para fazer as requisições HTTP abaixo, foi utilizada a ferramenta [httpie]((https://www.postman.com/)),
+Para fazer as requisições HTTP abaixo, foi utilizada a ferramenta [Postman](https://www.postman.com/),
 Tambem foi utilizado uma aplicação Front-end consumindo os ENDPOINT da API disponibilizada, usando o Fetch API do JavaScript
 e utilizando HTML/CSS para fornecer uma interface para o usuario.
 Se desejar utilizar uma interface abra a pasta front-SystemPonto, no Visual Stuido Code, baixe a extensao Live serve e abra uma
