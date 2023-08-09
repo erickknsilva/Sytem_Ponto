@@ -9,16 +9,6 @@ Objetivo é deixa os funcionarios cientes e confortavel, tendo o acesso do regis
 sua jornada diária, semanal e mensal a hora que quiser. 
 
 
-
-## Tecnologias
- 
-- [Spring Boot](https://spring.io/projects/spring-boot)
-- [Spring MVC](https://docs.spring.io/spring-framework/reference/web/webmvc.html)
-- [Spring Data JPA](https://spring.io/projects/spring-data-jpa)
-- [Mysql](https://dev.mysql.com/downloads/)
-- JavaScript
-- HTML/CSS
-  
 ## Práticas adotadas
 
 - SOLID
@@ -27,6 +17,16 @@ sua jornada diária, semanal e mensal a hora que quiser.
 - Injeção de Dependências
 - Tratamento de respostas de erro
 - Geração automática do Swagger com a OpenAPI 3
+
+## Tecnologias
+ 
+- JavaScript
+- HTML/CSS
+- [Spring Boot](https://spring.io/projects/spring-boot)
+- [Spring MVC](https://docs.spring.io/spring-framework/reference/web/webmvc.html)
+- [Spring Data JPA](https://spring.io/projects/spring-data-jpa)
+- [Mysql](https://dev.mysql.com/downloads/)
+
 
 ## Como Executar
 
