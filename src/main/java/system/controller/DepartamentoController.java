@@ -28,12 +28,16 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 
 @CrossOrigin(origins = "*")
-@RequiredArgsConstructor
+
 @RestController
 @RequestMapping("departamentos")
 public class DepartamentoController {
 
     private final DepartamentoService departamentoService;
+
+    public DepartamentoController(DepartamentoService departamentoService) {
+        this.departamentoService = departamentoService;
+    }
 
     @GetMapping
     public ResponseEntity<List<Departamento>> findAll() {

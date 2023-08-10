@@ -1,0 +1,93 @@
+body {
+    margin: 50px 40px;
+}
+
+#container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#editarFuncionarioForm {
+    display: flex;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+
+    font-family: cursive;
+    font-size: 18px;
+}
+h1{
+    text-align: center;
+}
+div {
+    margin-right: 30px;
+}
+
+label {
+    display: flex;
+    margin-top: 5px;
+}
+
+input {
+    padding: 5px;
+    outline: none;
+    border: black solid;
+    border-radius: 5px;
+    margin-top: 3px;
+    font-size: 18px;
+}
+
+select {
+    padding: 5px;
+    outline: none;
+    border: black solid;
+    border-radius: 5px;
+    margin-top: 3px;
+    font-size: 18px;
+}
+
+#btnSalva{
+    margin-top: 30px;
+}
+
+.bt {
+    display: inline-flex;
+    width: 150px;
+    /* Largura desejada para o botão */
+    height: 40px;
+    /* Altura desejada para o botão */
+    border-radius: 5px;
+    font-family: cursive;
+    font-size: 18px;
+    align-items: center;
+    justify-content: center;
+    background-color: #3d7e9a;
+    /* Cor de fundo do botão */
+    color: white;
+    /* Cor do texto do botão */
+    border: none;
+    /* Remove a borda do botão */
+    cursor: pointer;
+    /* Altera o cursor do mouse ao passar sobre o botão */
+    margin-right: 0px;
+}
+
+.bt:hover {
+    background-color: #2b5c73;
+    /* Cor de fundo do botão ao passar o mouse */
+}
+
+.bt:focus {
+    outline: none;
+    /* Remove a borda de foco do botão */
+}
+
+/* Estilo para o botão quando desabilitado */
+.bt:disabled {
+    background-color: #999;
+    /* Cor de fundo do botão desabilitado */
+    cursor: not-allowed;
+    /* Cursor não permitido quando o botão está desabilitado */
+}

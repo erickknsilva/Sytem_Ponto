@@ -79,7 +79,7 @@ public class Funcionario {
 
     @NotNull(message = "Insira o departamento do funcionario.")
     @ManyToOne
-    @JoinColumn(name = "id_dep")
+    @JoinColumn(name = "idDep")
     private Departamento departamento;
 
     @JsonIgnore
@@ -116,6 +116,7 @@ public class Funcionario {
         this.cargaMensal = funcionario.getCargaMensal();
         this.tipoContrato = funcionario.getTipoContrato();
         this.departamento = funcionario.getDepartamento();
+
     }
 
     @Override
@@ -126,3 +127,5 @@ public class Funcionario {
                 + departamento.getNome();
     }
 }
+
+

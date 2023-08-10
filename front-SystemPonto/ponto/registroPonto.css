@@ -1,0 +1,208 @@
+@keyframes animacao {
+    from {
+        color: orange;
+        font-size: 28px;
+    }
+
+    to {
+        color: blueviolet;
+    }
+}
+
+body {
+    margin: 50px 40px;
+    padding: 0;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+}
+
+.green .bt {
+    background-color: green;
+}
+
+/* Animação para retornar à cor original após 2 segundos */
+@keyframes resetColor {
+    0% {
+        background-color: green;
+    }
+    100% {
+        background-color: #3d7e9a;
+    }
+}
+.container {
+
+    padding: 40px 40px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-wrap: wrap;
+    column-gap: 5px;
+    row-gap: 15px;
+
+    border-radius: 10px;
+
+}
+
+.error-message {
+    color: rgb(255, 1, 1);
+    font-size: 16px;
+    font-family: cursive;
+}
+
+.item {
+
+    margin-top: 50px;
+    background-color: rgba(255, 255, 255, 0.959);
+    padding: 40px 40px;
+    box-shadow: -0px -0px 5px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    flex-wrap: wrap;
+    column-gap: 5px;
+    row-gap: 8px;
+
+    font-size: 18px;
+    font-family: monospace;
+    margin-right: 20px;
+    flex-direction: column;
+    position: relative;
+
+}
+
+
+
+#mss-login {
+    display: block;
+    justify-content: center;
+    align-items: center;
+
+    flex-wrap: wrap;
+    column-gap: 5px;
+    row-gap: 15px;
+
+    font-size: 28px;
+    font-family: cursive;
+    flex-direction: row;
+    text-transform: capitalize;
+    padding-bottom: 10px;
+}
+
+#ani {
+    animation-name: animacao;
+    animation-duration: 3s;
+    animation-delay: 1s;
+    animation-iteration-count: infinite;
+}
+
+.inpt {
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 20px;
+    border: 2px solid black;
+    border-radius: 4px;
+    font-family: sans-serif;
+    padding: 10px;
+    width: 250px;
+    box-sizing: border-box;
+    /* Para Firefox */
+    -moz-appearance: textfield;
+    /* Para outros navegadores */
+    appearance: textfield;
+    /* Desabilita as setas no Chrome e Safari */
+    -webkit-appearance: none;
+    /* Desabilita as setas no Firefox */
+    -moz-appearance: none;
+}
+
+/* Para navegadores baseados em WebKit (como Chrome e Safari) */
+.inpt::-webkit-inner-spin-button,
+.inpt::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.bt {
+    display: inline-flex;
+    width: 150px;
+    /* Largura desejada para o botão */
+    height: 40px;
+    /* Altura desejada para o botão */
+    border-radius: 5px;
+    font-family: cursive;
+    font-size: 18px;
+    align-items: center;
+    justify-content: center;
+    background-color: #3d7e9a;
+    /* Cor de fundo do botão */
+    color: white;
+    /* Cor do texto do botão */
+    border: none;
+    /* Remove a borda do botão */
+    cursor: pointer;
+    /* Altera o cursor do mouse ao passar sobre o botão */
+    margin-right: 0px;
+}
+
+.bt:hover {
+    background-color: #2b5c73;
+    /* Cor de fundo do botão ao passar o mouse */
+}
+
+.bt:focus {
+    outline: none;
+    /* Remove a borda de foco do botão */
+}
+
+/* Estilo para o botão quando desabilitado */
+.bt:disabled {
+    background-color: #999;
+    /* Cor de fundo do botão desabilitado */
+    cursor: not-allowed;
+    /* Cursor não permitido quando o botão está desabilitado */
+}
+
+
+
+@media only screen and (max-width: 449px) and (min-width: 0px) {
+
+    @keyframes animacao {
+        from {
+            color: rgba(0, 19, 44, 0.456);
+            font-size: 14px;
+        }
+
+        to {
+            color: rgb(255, 0, 0);
+        }
+    }
+
+    #mss-login {
+        font-size: 14px;
+    }
+
+    .item {
+        margin: 0px 0px;
+        padding: 20px 10px;
+    }
+
+    .container {
+        margin: 0px 0px;
+        padding: 40px 10px;
+    }
+
+    .inpt {
+
+        border: 2px solid black;
+        border-radius: 4px;
+        font-family: sans-serif;
+        padding: 5px;
+        width: 220px;
+        box-sizing: border-box;
+    }
+
+}

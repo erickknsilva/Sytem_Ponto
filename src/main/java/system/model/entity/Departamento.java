@@ -27,7 +27,7 @@ public class Departamento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idDEP")
+    @Column(name = "id_dep")
     private Integer id;
 
     @NotBlank(message = "Insira o nome do departamento.")

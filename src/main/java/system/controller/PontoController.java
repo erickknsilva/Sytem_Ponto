@@ -20,8 +20,11 @@ import system.infrastructure.exceptions.advice.PontoControllerException;
 @PontoControllerException
 public class PontoController {
 
-    @Autowired
-    private PontoService pontoService;
+    private final PontoService pontoService;
+
+    public PontoController(PontoService pontoService) {
+        this.pontoService = pontoService;
+    }
 
     @PostMapping
     public ResponseEntity<String> registrarPonto(@RequestBody Integer matricula) {

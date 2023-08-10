@@ -28,21 +28,23 @@ import system.model.repositorys.PontoRepository;
 @Service
 public class Employee implements Contract {
 
-    @Autowired
-    private PontoRepository pontoRepository;
+    private final PontoRepository pontoRepository;
 
-    @Autowired
-    private FuncionarioRepository funcRepository;
+    private final FuncionarioRepository funcRepository;
 
-    @Autowired
-    private EmailService emailService;
+    private final EmailService emailService;
 
+    public Employee(PontoRepository pontoRepository, FuncionarioRepository funcRepository, EmailService emailService) {
+        this.pontoRepository = pontoRepository;
+        this.funcRepository = funcRepository;
+        this.emailService = emailService;
+    }
 
     @Override
     public BigDecimal calcularSalarioPorDia(BigDecimal salario, int cargaMensal, LocalTime horasTrabalhadas) {
         BigDecimal cargaHorariaMensal = new BigDecimal(cargaMensal);
 
-        BigDecimal salarioPorHora = salario.divide(cargaHorariaMensal, MathContext.DECIMAL32)
+        BigDecimal salarioPorHora = salario
                 .setScale(2, RoundingMode.DOWN);
         System.out.println("salario por hora: " + salarioPorHora);
 
@@ -74,7 +76,7 @@ public class Employee implements Contract {
 
             if (pontoAnterior != null && pontoAnterior.getHoraSaida() == null) {
 
-                atualizarPonto(pontoAnterior, LocalTime.of(17, LocalTime.now().getMinute()));
+                atualizarPonto(pontoAnterior, LocalTime.of(16, LocalTime.now().getMinute()));
                 return this.pontoRepository.save(pontoAnterior);
             }
         }
@@ -123,12 +125,52 @@ public class Employee implements Contract {
                 menssagem);
     }
 
+    public void mensagemEmailFecharPonto(Funcionario funcionario, Ponto ponto) {
+        String mensagem = mensagemSaida(funcionario, ponto);
+
+        this.emailService.sendEmail(funcionario.getEmail(), "Este é um email do registro do ponto",
+                mensagem);
+    }
+
+    public String mensagemSaida(Funcionario funcionario, Ponto ponto) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+        BiFunction<Funcionario, Ponto, String> horaSaida = (func, pon) -> {
+
+            if (func.getTipoContrato().equalsIgnoreCase("mensalista")) {
+                String mensagem = "\nNome: " + func.getNome().concat(" " + func.getSobrenome())
+                        + "\nTipo contrato: " + func.getTipoContrato()
+                        + "\nDepartamento: " + func.getDepartamento().getNome()
+                        + "\nHora saida: " + formatter.format(LocalTime.now())
+                        + "\nData: " + pon.getData().format(formatterDate)
+                        + "\n\nObrigado pelo seus serviços, bom descanso e até.";
+                System.out.println(mensagem);
+                return mensagem;
+            }
+
+            String mensagem = "Nome: " + func.getNome().concat(" " + func.getSobrenome())
+                    + "\nDepartamento: " + func.getDepartamento().getNome()
+                    + "\nTipo contrato: " + func.getTipoContrato()
+                    + "\nHora saida: " + formatter.format(pon.getHoraSaida())
+                    + "\nHora da entrada: " + pon.getHoraEntrada()
+                    + "\nData: " + pon.getData().format(formatterDate)
+                    + "\nSalario do dia: " + pon.getSalarioDia()
+                    + "\nSalario do mes: R$" + pon.getSalarioMes() + ", até o momento."
+                    + "\nQtd Horas trabalhada: " + pon.getHorasTrabalhada()
+                    + "\n\nObrigado pelo seus serviços, bom descanso e até.";
+            System.out.println(mensagem);
+            return mensagem;
+        };
+        return horaSaida.apply(funcionario, ponto);
+    }
+
     public String calcularHoraAlmocoAndSaida(Funcionario funcionario, Ponto ponto) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 
         BiFunction<Funcionario, Ponto, String> horaAlmocoAndSaida = (Funcionario func, Ponto pon) -> {
-            if (func.getTipoContrato().equalsIgnoreCase("mensalista")) {
 
+            if (func.getTipoContrato().equalsIgnoreCase("mensalista")) {
                 //Calcula a hora da saida
                 LocalTime saida = ponto.getHoraEntrada().
                         plusHours(func.getCargaDiaria().getHour());

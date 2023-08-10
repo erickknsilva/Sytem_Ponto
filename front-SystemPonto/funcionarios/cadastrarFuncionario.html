@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt_br">
+
+<head>
+    <title>Cadastrar Funcionario</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="./css/cadastrarFuncionario.css">
+    <link rel="stylesheet" href="../menu.css">
+
+</head>
+
+<body>
+    <header>
+        <h1>Sistema de Ponto</h1>
+    </header>
+
+    <nav>
+        <div class="topnav" id="myTopnav">
+            <a href="../ponto/registrarPonto.html" target="conteudo" class="active">Bater Ponto</a>
+
+            <div class="dropdown">
+                <button class="dropbtn">Departamento
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content" target="conteudo">
+                    <a href="../departamentos/listarDepartamentos.html" target="conteudo">Listar</a>
+                    <a href="../departamentos/buscarDepartamentoPorID.html" target="conteudo">Pesquisar</a>
+                    <a href="../departamentos/cadastrarDepartamento.html" target="conteudo">Cadastrar</a>
+                    <a href="../departamentos/pesquisarParaEditar.html" target="conteudo">Editar</a>
+                    <a href="../departamentos/excluirDepartamento.html" target="conteudo">Exluir</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Funcionario
+                    <i class="fa fa-caret-down"></i>
+                </button>
+
+                <div class="dropdown-content" target="conteudo">
+                    <a href="listarFuncionario.html" target="conteudo">Listar</a>
+                    <a href="pesquisarFuncionario.html" target="conteudo">Pesquisar</a>
+                    <a href="cadastrarFuncionario.html" target="conteudo">Cadastrar</a>
+                    <a href="editarFuncionario.html" target="conteudo">Editar</a>
+                    <a href="excluirFuncionario.html" target="conteudo">Exluir</a>
+                </div>
+            </div>
+            <a href="../index.html" target="conteudo">Sobre</a>
+
+
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+        </div>
+    </nav>
+
+
+
+    <h1>Cadastrar Funcionario</h1>
+    <div id="container">
+        <form id="cadastrar-form">
+            <div>
+                <label for="nome">Nome</label>
+                <input type="text" id="nome" name="nome" size="20">
+                <div>
+                    <label for="sobrenome">Sobrenome</label>
+                    <input type="text" id="sobrenome" name="sobrenome" size="35">
+                </div>
+                <div>
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" size="35">
+                </div>
+                <div>
+                    <label for="salario">Salário/Valor hora</label>
+                    <input type="number" id="salario" name="salario" min="5" step="0.01">
+                </div>
+            </div>
+
+            <div>
+                <label for="cargaDiaria">Carga Horária Diária</label>
+                <input type="time" id="cargaDiaria" name="cargaDiaria">
+                <div>
+                    <label for="cargaSemanal">Carga Horária Semanal</label>
+                    <input type="number" id="cargaSemanal" name="cargaSemanal" min="0">
+                </div>
+                <div>
+                    <label for="cargaMensal">Carga Horária Mensal</label>
+                    <input type="number" id="cargaMensal" name="cargaMensal">
+                </div>
+                <div>
+                    <label for="tipoContrato">Tipo de Contrato</label>
+                    <select id="tipoContrato" name="tipoContrato">
+                        <option value="mensalista">Mensalista</option>
+                        <option value="horista">Horista</option>
+                        <!-- Opções de departamento aqui -->
+                    </select>
+                </div>
+
+            </div>
+
+            <div>
+                <div>
+                    <label for="dataEntrada">Data de Entrada</label>
+                    <input type="date" id="dataEntrada" name="dataEntrada">
+                </div>
+                <div>
+                    <label for="departamento">Departamento</label>
+                    <select id="departamento" name="departamento">
+
+                    </select>
+                </div>
+                <div id="btnSalva">
+                    <button class="bt" type="submit">Cadastrar</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    <footer style="margin-top: 75px;">
+        <center>
+            <p><strong>&COPY;ek2Soft</strong></p>
+        </center>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
+    <script src="./javaScript/scriptCadastrarFuncionario.js"></script>
+    <script src="./javaScript/scriptDepartamentoAPI.js"></script>
+    <script src="../menuScript.js"></script>
+</body>
+
+</html>

@@ -21,13 +21,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 @FuncionarioControllerException
-@RequiredArgsConstructor
 @RestController
 @RequestMapping("funcionarios")
 @CrossOrigin(origins = "*")
 public class FuncionarioController {
 
     private final FuncionarioService funcionarioService;
+
+    public FuncionarioController(FuncionarioService funcionarioService) {
+        this.funcionarioService = funcionarioService;
+    }
 
     @GetMapping
     public ResponseEntity<List<Funcionario>> findAll() {

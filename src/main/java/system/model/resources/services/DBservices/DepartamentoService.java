@@ -13,11 +13,14 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@RequiredArgsConstructor
 @Service
 public class DepartamentoService {
 
     private final DepartamentoRepository departamentoRepository;
+
+    public DepartamentoService(DepartamentoRepository departamentoRepository) {
+        this.departamentoRepository = departamentoRepository;
+    }
 
     public List<Departamento> findAll() {
 
@@ -74,4 +77,5 @@ public class DepartamentoService {
         }
         return null;
     }
+
 }

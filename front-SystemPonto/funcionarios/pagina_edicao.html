@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt_br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Funcionario</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+    <link rel="stylesheet" href="../menu.css">
+    <link rel="stylesheet" href="../menuScript.js">
+
+    <link rel="stylesheet" href="./css/paginaEdicao.css">
+    <link rel="stylesheet" href="../styleGlobal.css">
+
+</head>
+
+<body>
+
+    <header>
+        <h1>Sistema de Ponto</h1>
+    </header>
+    <nav>
+        <div class="topnav" id="myTopnav">
+            <a href="../ponto/registrarPonto.html" class="active">Bater Ponto</a>
+
+            <div class="dropdown">
+                <button class="dropbtn">Departamento
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content" target="conteudo">
+                    <a href="../departamentos/listarDepartamentos.html" target="conteudo">Listar</a>
+                    <a href="../departamentos/buscarDepartamentoPorID.html" target="conteudo">Pesquisar</a>
+                    <a href="../departamentos/cadastrarDepartamento.html" target="conteudo">Cadastrar</a>
+                    <a href="../departamentos/pesquisarParaEditar.html" target="conteudo">Editar</a>
+                    <a href="../departamentos/excluirDepartamento.html" target="conteudo">Exluir</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Funcionario
+                    <i class="fa fa-caret-down"></i>
+                </button>
+
+                <div class="dropdown-content" target="conteudo">
+                    <a href="listarFuncionario.html" target="conteudo">Listar</a>
+                    <a href="pesquisarFuncionario.html" target="conteudo">Pesquisar</a>
+                    <a href="cadastrarFuncionario.html" target="conteudo">Cadastrar</a>
+                    <a href="editarFuncionario.html" target="conteudo">Editar</a>
+                    <a href="excluirFuncionario.html" target="conteudo">Exluir</a>
+                </div>
+            </div>
+            <a href="../index.html" target="conteudo" >Sobre</a>
+
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+        </div>
+    </nav>
+
+    <h1>Editar Funcionário</h1>
+    <div id="container">
+        <form id="editarFuncionarioForm">
+            <div>
+                <label for="matricula">Matrícula:</label>
+                <input type="text" id="matricula" name="matricula" readonly>
+                <div>
+                    <label for="nome">Nome:</label>
+                    <input type="text" id="nome" name="nome">
+                    <!-- <span id="nome-error" class="error-message"></span> -->
+                </div>
+                <div>
+                    <label for="sobrenome">Sobrenome:</label>
+                    <input type="text" id="sobrenome" name="sobrenome">
+                    <!-- <span id="sobrenome-error" class="error-message"></span> -->
+
+                </div>
+
+                <div>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email">
+                </div>
+
+            </div>
+
+            <div>
+                <div>
+                    <label for="salario">Salário:</label>
+                    <input type="text" id="salario" name="salario">
+                </div>
+                <label for="cargaDiaria">Carga Diária:</label>
+                <input type="text" id="cargaDiaria" name="cargaDiaria">
+                <div>
+                    <label for="cargaSemanal">Carga Semanal:</label>
+                    <input type="number" id="cargaSemanal" name="cargaSemanal">
+                </div>
+                <div>
+                    <label for="cargaMensal">Carga Mensal:</label>
+                    <input type="number" id="cargaMensal" name="cargaMensal">
+                </div>
+
+            </div>
+            <div>
+                <div>
+                    <label for="tipoContrato">Tipo de Contrato:</label>
+                    <input type="text" id="tipoContrato" name="tipoContrato">
+                </div>
+                <div>
+                    <label for="dataEntrada">Data de Entrada:</label>
+                    <input type="date" id="dataEntrada" name="dataEntrada">
+                </div>
+                <div>
+                    <label for="departamento">Departamento:</label>
+                    <select id="departamento" name="departamento">
+                    </select>
+                </div>
+                <div id="btnSalva">
+                    <button class="bt" type="submit">Salvar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <footer style="margin-top: 75px;">
+        <center>
+            <p><strong>&COPY;ek2Soft</strong></p>
+        </center>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
+
+    <script src="../scriptFuncional.js"></script>
+    <script src="./javaScript/scriptExibirFunc.js"></script>
+    <script src="./javaScript/scriptDepartamentoAPI.js"></script>
+
+</body>
+
+
+</html>

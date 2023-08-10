@@ -19,13 +19,18 @@ import java.util.List;
 /**
  * @author eric
  */
-@RequiredArgsConstructor
 @Service
 public class PontoService {
 
     private final FuncionarioService funcionarioService;
     private final Employee employee;
     private final PontoRepository pontoRepository;
+
+    public PontoService(FuncionarioService funcionarioService, Employee employee, PontoRepository pontoRepository) {
+        this.funcionarioService = funcionarioService;
+        this.employee = employee;
+        this.pontoRepository = pontoRepository;
+    }
 
     public Ponto findById(Integer id) {
         return pontoRepository.findById(id).orElse(null);
@@ -108,29 +113,6 @@ public class PontoService {
      * encontrado.
      * @author Erick Nunes da Silva
      */
-//    private String fecharPonto(ContratoFuncionario contrato, Integer matricula, Funcionario funcionario, Ponto pontoAnterior) {
-//
-//        Ponto pontoFechado = contrato.fecharPonto(matricula);
-//
-//        if (pontoFechado != null) {
-//
-//            // Calcula o salário diário do ponto fechado
-//            pontoFechado.setSalarioDia(contrato.calcularSalarioPorDia(funcionario.getSalario(),
-//                    funcionario.getCargaMensal(), pontoAnterior.getHorasTrabalhada()));
-//
-//            // Calcula o salário acumulado do mês
-//            BigDecimal salarioMesAcumulado = calcularSalarioMesAcumulado(funcionario, pontoFechado);
-//
-//            // Calcula o novo salário acumulado do mês
-//            BigDecimal novoSalarioMes = salarioMesAcumulado.add(pontoFechado.getSalarioDia());
-//
-//            //pega o salario do dia e adiciona na soma do salario acumulado do mês
-//            pontoFechado.setSalarioMes(novoSalarioMes);
-//            pontoRepository.save(pontoFechado);
-//            return "Ponto fechado com sucesso.";
-//        }
-//        return null;
-//    }
     private String fecharPonto(Employee employee, Integer matricula, system.model.entity.Funcionario funcionario, Ponto pontoAnterior) {
         Ponto pontoFechado = employee.fecharPonto(matricula);
 
@@ -156,6 +138,7 @@ public class PontoService {
             }
 
             pontoRepository.save(pontoFechado);
+            this.employee.mensagemEmailFecharPonto(funcionario, pontoFechado);
             return "Ponto fechado com sucesso.";
         }
         return null;

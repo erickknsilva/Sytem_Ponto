@@ -62,7 +62,7 @@ public class Ponto {
     }
 
     public Ponto(LocalTime horaEntrada, LocalTime horaSaida, boolean diaTrabalhado,
-            Funcionario funcionario, String nomeFuncionario)//
+                 Funcionario funcionario, String nomeFuncionario)//
     {
         this.horaEntrada = horaEntrada;
         this.horaSaida = horaSaida;
@@ -75,3 +75,5 @@ public class Ponto {
     }
 
 }
+
+

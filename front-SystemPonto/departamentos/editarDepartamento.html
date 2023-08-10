@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt_br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Departamento</title>
+    <link rel="stylesheet" href="../styleGlobal.css">
+    <link rel="stylesheet" href="../menu.css">
+    <link rel="stylesheet" href="./css/cadastrarDepartamento.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+</head>
+
+<body>
+
+    <header>
+        <h1>Sistema de Ponto</h1>
+    </header>
+
+    <nav>
+        <div class="topnav" id="myTopnav">
+            <a href="ponto/registrarPonto.html" target="conteudo" class="active">Bater Ponto</a>
+
+            <div class="dropdown">
+                <button class="dropbtn">Departamento
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content" target="conteudo">
+                    <a href="../departamentos/listarDepartamentos.html" target="conteudo">Listar</a>
+                    <a href="../departamentos/buscarDepartamentoPorID.html" target="conteudo">Pesquisar</a>
+                    <a href="../departamentos/cadastrarDepartamento.html" target="conteudo">Cadastrar</a>
+                    <a href="../departamentos/pesquisarParaEditar.html" target="conteudo">Editar</a>
+                    <a href="../departamentos/excluirDepartamento.html" target="conteudo">Exluir</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Funcionario
+                    <i class="fa fa-caret-down"></i>
+                </button>
+
+                <div class="dropdown-content" target="conteudo">
+                    <a href="../funcionarios/listarFuncionario.html" target="conteudo">Listar</a>
+                    <a href="../funcionarios/pesquisarFuncionario.html" target="conteudo">Pesquisar</a>
+                    <a href="../funcionarios/cadastrarFuncionario.html" target="conteudo">Cadastrar</a>
+                    <a href="../funcionarios/editarFuncionario.html" target="conteudo">Editar</a>
+                    <a href="../funcionarios/excluirFuncionario.html" target="conteudo">Exluir</a>
+                </div>
+            </div>
+            <a href="../index.html" target="conteudo" >Sobre</a>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+        </div>
+    </nav>
+    <h1 style="font-family: cursive;">Editar departamento</h1>
+    <div id="container">
+        <form id="editDepartamento">
+            <div>
+                <label for="id">Identificação</label>
+                <input type="number" id="id" name="id" readonly><br>
+
+                <label for="nome">Nome</label>
+                <input type="text" id="nome" name="nome"><br>
+
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email"><br>
+                <span id="nome-email" class="error-message"></span>
+            </div>
+
+            <div>
+                <label for="responsavel">Responsável</label>
+                <input type="text" id="responsavel" name="responsavel"><br>
+                <span id="nome-responsavel" class="error-message"></span>
+
+                <label for="telefone">Telefone</label>
+                <input type="tel" id="telefone" name="telefone"><br>
+                <span id="nome-telefone" class="error-message"></span>
+            </div>
+            <div style="margin-top: 170px;" id="btnSalva">
+                <input class="bt" type="submit" value="Alterar">
+            </div>
+
+        </form>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script src="../scriptFuncional.js"></script>
+    <script src="./javaScript/editarDepartamento.js"></script>
+    <script src="../menuScript.js"></script>
+</body>
+
+</html>

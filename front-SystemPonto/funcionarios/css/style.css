@@ -1,0 +1,261 @@
+body {
+    margin: 50px 40px;
+}
+
+* {
+    padding: 0;
+    box-sizing: border-box;
+    font-family: cursive, sans-serif, arial;
+
+}
+
+h1{
+    text-align: center;
+}
+#myTable {
+    margin-top: 50px;
+    border-collapse: collapse;
+    margin-left: 70px;
+    z-index: -1;
+    font-size: 16px;
+}
+
+tr:nth-child(even) {
+    background-color: rgb(199, 248, 248)
+}
+
+th {
+
+    padding: 8px 7px;
+    border: 1px solid black;
+}
+
+td {
+    border: none;
+    padding-top: 8px;
+    padding-right: 10px;
+    padding-left: 10px;
+    border: 1px solid black;
+}
+
+#pagination {
+    text-align: right;
+    font-size: 18px;
+    margin: 10px 25px;
+}
+
+
+/* inicio das configuraçoes de botoes */
+.botao-editar {
+    background: none;
+    border: none;
+    font-size: 22px;
+    color: #0344b3;
+}
+
+.botao-editar:hover i {
+    font-size: 32px;
+    animation: bounce 0.5s;
+}
+
+.botao-excluir {
+    color: #fa0000e4;
+    /* color: #00225c; */
+    background: none;
+    border: none;
+    font-size: 22px;
+}
+
+
+.botao-excluir:hover i {
+    font-size: 32px;
+    animation: bounce 0.5s;
+}
+
+/* Fim das configuraçoes de botao. */
+.swal2-container {
+    width: 450px !important;
+    top: 35% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+
+}
+
+.swal2-title {
+    font-size: 20px !important;
+    font-weight: bold;
+    font-family: cursive;
+}
+
+.swal2-icon {
+    width: 26px !important;
+    height: 24px !important;
+    font-size: 18px !important;
+    margin-top: 10px !important;
+    color: #00225c !important;
+
+}
+
+.swal2-actions button {
+    font-size: 16px !important;
+    padding: 5px 10px !important;
+    margin: 5px !important;
+
+}
+
+.swal2-popup {
+    color: #000000;
+    background-color: #fffffff6 !important;
+    border: 2px solid #CCCCCC !important;
+    border-radius: 8px !important;
+    box-shadow: 1px 1px 10px #CCCCCC;
+
+}
+
+.custom-swal-content {
+    font-size: 18px;
+    /* Aumenta o tamanho da fonte */
+    color: #000000;
+    /* Define a cor do texto como preto */
+}
+
+.swal2-content {
+    font-size: 18px;
+    /* Aumenta o tamanho da fonte */
+    color: #000000;
+    /* Define a cor do texto como preto */
+}
+
+.error-message {
+    color: red;
+    font-size: 12px;
+}
+
+
+.custom-toast {
+    animation: slideInRight 0.5s;
+}
+
+
+.divSearch {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 22vh;
+}
+
+input {
+    width: 60vh;
+    padding: 5px;
+    outline: none;
+    border: black solid;
+    border-radius: 7px;
+}
+
+
+.link-a {
+    color: black;
+    text-decoration: none;
+    display: flex;
+    align-content: center;
+    flex-direction: column;
+}
+
+.link-a:hover {
+    color: blueviolet;
+    font-size: 20px;
+}
+
+#container {
+    height: 200px;
+    overflow-y: scroll;
+}
+
+.divSearch {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 22vh;
+}
+
+input {
+    width: 60vh;
+    padding: 5px;
+    outline: none;
+    border: black solid;
+    border-radius: 7px;
+}
+
+
+.link-a {
+    color: black;
+    text-decoration: none;
+    display: flex;
+    align-content: center;
+    flex-direction: column;
+}
+
+.link-a:hover {
+    color: blueviolet;
+    font-size: 20px;
+}
+
+#container {
+    height: 200px;
+    overflow-y: scroll;
+}
+
+@keyframes slideInRight {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes bounce {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-10px);
+    }
+
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+.fa-bounce {
+    animation: bounce 1s infinite;
+}
+
+/*  */
+
+
+@media(max-width:455px) {
+
+    #search- {
+        font-size: 12px;
+    }
+
+    input {
+        width: 28vh;
+        padding: 5px;
+        outline: none;
+        border: black solid;
+        border-radius: 7px;
+    }
+}

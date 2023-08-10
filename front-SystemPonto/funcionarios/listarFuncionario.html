@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt_br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Funcionarios</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" type="text/css" href="../menu.css">
+
+</head>
+<style>
+
+</style>
+
+<body>
+
+    <header>
+        <h1>Sistema de Ponto</h1>
+    </header>
+
+    <nav>
+        <div class="topnav" id="myTopnav">
+            <a href="../ponto/registrarPonto.html" target="conteudo" class="active">Bater Ponto</a>
+
+            <div class="dropdown">
+                <button class="dropbtn">Departamento
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content" target="conteudo">
+                    <a href="../departamentos/listarDepartamentos.html" target="conteudo">Listar</a>
+                    <a href="../departamentos/buscarDepartamentoPorID.html" target="conteudo">Pesquisar</a>
+                    <a href="../departamentos/cadastrarDepartamento.html" target="conteudo">Cadastrar</a>
+                    <a href="../departamentos/pesquisarParaEditar.html" target="conteudo">Editar</a>
+                    <a href="../departamentos/excluirDepartamento.html" target="conteudo">Exluir</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Funcionario
+                    <i class="fa fa-caret-down"></i>
+                </button>
+
+                <div class="dropdown-content" target="conteudo">
+                    <a href="listarFuncionario.html" target="conteudo">Listar</a>
+                    <a href="pesquisarFuncionario.html" target="conteudo">Pesquisar</a>
+                    <a href="cadastrarFuncionario.html" target="conteudo">Cadastrar</a>
+                    <a href="editarFuncionario.html" target="conteudo">Editar</a>
+                    <a href="excluirFuncionario.html" target="conteudo">Exluir</a>
+                </div>
+            </div>
+
+            <a href="../index.html" target="conteudo" >Sobre</a>
+
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+        </div>
+    </nav>
+
+    <h1 style="font-family: cursive;">Lista de Funcionarios</h1>
+
+    <table id="myTable">
+        <thead>
+            <tr>
+                <th>Matricula</th>
+                <th>Nome</th>
+                <th>Departamento</th>
+                <th>Salario</th>
+                <th>Carga Diaria</th>
+                <th>Tipo Contrato</th>
+                <th>Email</th>
+                <th>Data Entrada</th>
+                <th>Editar</th>
+                <th>Excluir</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <div id="pagination">
+        <button id="previousBtn">Anterior</button>
+        <span id="pageNumber"></span>
+        <button id="nextBtn">Próxima</button>
+    </div>
+
+
+    <footer>
+        <center>
+            <p><strong>&COPY;ek2Soft</strong></p>
+        </center>
+    </footer>
+    <!-- </div> -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./javaScript/scriptListarFunc.js"></script>
+    <script src="../scriptFuncional.js"></script>
+    <script src="../menuScript.js"></script>
+
+
+</body>
+
+</html>
+
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
