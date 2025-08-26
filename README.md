@@ -2,7 +2,7 @@
   Sistema de Bater Ponto
 </h1>
 
-API para registrar os pontos do funcionários, encaminhando um e-mail com as informações hora de entrada, almoço/retorno e saída se ele vor do tipo "mensalista". Agora se o funcionário vor do tipo "horista", o e-mail deve conter a hora de entrada, quantidade de horas trabalhas, salario do dia e o salario do mês até o momento. Objetivo é deixa os funcionários cientes e confortável, tendo o acesso do registro do seu ponto a qualquer momento, podendo consultar sua jornada diária, semanal e mensal.
+API para registrar os pontos do funcionários, encaminhando um e-mail com as informações hora de entrada, almoço/retorno e saída se ele vor do tipo "mensalista". Se o funcionário vor do tipo "horista", o e-mail deve conter a hora de entrada, quantidade de horas trabalhas, salario do dia e o salario do mês até o momento. Objetivo é deixa os funcionários cientes e confortável, tendo o acesso do registro do seu ponto a qualquer momento, podendo consultar sua jornada diária, semanal e mensal.
 
 
 ## Práticas adotadas
