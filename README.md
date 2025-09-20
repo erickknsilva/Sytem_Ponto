@@ -12,7 +12,7 @@ API para registrar os pontos do funcionários, encaminhando um e-mail com as inf
 - Consultas com Spring Data JPA
 - Injeção de Dependências
 - Tratamento de respostas de erro
-- Geração automática do Swagger com a OpenAPI 3
+- Geração automática do Swagger com a OpenAPI3/Swagger
 
 ## Tecnologias
  
